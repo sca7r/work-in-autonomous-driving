@@ -1,5 +1,5 @@
 # ADAPT OVERVIEW
-Welcome to the main repository of **ADAPT** System. This repository will help you navigate through our organization repositories and hopefully provide a comprehensive understanding of the system architecture and breifly describe components functionality.
+Welcome to the main repository of **ADAPT** System. This repository will help you navigate through Project and hopefully provide a comprehensive understanding of the system architecture and breifly describe components functionality.
 
 ### **Question Zero:**
 To better understand how this project came to life and what ideas are behined it, let's take a look at our **Question Zero**, in which we try to answer the following about our project; What, For Whom, Where, Why, How:
