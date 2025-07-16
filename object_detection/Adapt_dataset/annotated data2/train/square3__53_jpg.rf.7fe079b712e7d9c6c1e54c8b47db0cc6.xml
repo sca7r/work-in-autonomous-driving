@@ -1,0 +1,40 @@
+<annotation>
+	<folder></folder>
+	<filename>square3__53_jpg.rf.7fe079b712e7d9c6c1e54c8b47db0cc6.jpg</filename>
+	<path>square3__53_jpg.rf.7fe079b712e7d9c6c1e54c8b47db0cc6.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>480</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>potted plant</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>228</xmin>
+			<xmax>378</xmax>
+			<ymin>247</ymin>
+			<ymax>391</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>potted plant</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>271</xmin>
+			<xmax>365</xmax>
+			<ymin>48</ymin>
+			<ymax>248</ymax>
+		</bndbox>
+	</object>
+</annotation>

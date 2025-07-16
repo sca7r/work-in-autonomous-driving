@@ -1,0 +1,53 @@
+<annotation>
+	<folder></folder>
+	<filename>lane1a__30_jpg.rf.25c5e113b901c1dd3ad58b3346730b5f.jpg</filename>
+	<path>lane1a__30_jpg.rf.25c5e113b901c1dd3ad58b3346730b5f.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>480</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>traffic light</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>422</xmin>
+			<xmax>462</xmax>
+			<ymin>115</ymin>
+			<ymax>196</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>traffic light</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>373</xmin>
+			<xmax>416</xmax>
+			<ymin>168</ymin>
+			<ymax>219</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>car</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>495</xmin>
+			<xmax>586</xmax>
+			<ymin>244</ymin>
+			<ymax>287</ymax>
+		</bndbox>
+	</object>
+</annotation>

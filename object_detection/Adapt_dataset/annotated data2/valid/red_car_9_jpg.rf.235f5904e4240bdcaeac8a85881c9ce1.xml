@@ -1,0 +1,53 @@
+<annotation>
+	<folder></folder>
+	<filename>red_car_9_jpg.rf.235f5904e4240bdcaeac8a85881c9ce1.jpg</filename>
+	<path>red_car_9_jpg.rf.235f5904e4240bdcaeac8a85881c9ce1.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>640</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>traffic light</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>608</xmin>
+			<xmax>625</xmax>
+			<ymin>215</ymin>
+			<ymax>286</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>potted plant</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>1</xmin>
+			<xmax>57</xmax>
+			<ymin>282</ymin>
+			<ymax>401</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>car</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>300</xmin>
+			<xmax>378</xmax>
+			<ymin>360</ymin>
+			<ymax>438</ymax>
+		</bndbox>
+	</object>
+</annotation>

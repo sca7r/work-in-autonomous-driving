@@ -1,0 +1,40 @@
+<annotation>
+	<folder></folder>
+	<filename>human02__2_jpg.rf.99f0f5f95c278e69a281c8c8bdd3f224.jpg</filename>
+	<path>human02__2_jpg.rf.99f0f5f95c278e69a281c8c8bdd3f224.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>640</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>potted plant</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>1</xmin>
+			<xmax>56</xmax>
+			<ymin>285</ymin>
+			<ymax>401</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>person</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>314</xmin>
+			<xmax>352</xmax>
+			<ymin>425</ymin>
+			<ymax>522</ymax>
+		</bndbox>
+	</object>
+</annotation>

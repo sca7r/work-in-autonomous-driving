@@ -1,0 +1,8 @@
+Dummy Data for User Input (String)
+ros2 topic pub /user_info std_msgs/String "data: 'Juno Muller; AUDI R8; 4XYZ28'"
+
+Dummy Data for Vehicle location (PoseStamped)
+ros2 topic pub /loc_pose geometry_msgs/PoseStamped "{header: {stamp: {sec: 0, nanosec: 0}, frame_id: 'map'}, pose: {position: {x: 25.0, y: 249.0, z: 50.0}, orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0}}}"
+
+Dummy Data for Selected parking location (PoseStamped)
+ros2 topic pub /spot_location geometry_msgs/PoseStamped "{header: {stamp: {sec: 0, nanosec: 0}, frame_id: 'map'}, pose: {position: {x: 64.5, y: 58.20, z: 61.78}, orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0}}}"

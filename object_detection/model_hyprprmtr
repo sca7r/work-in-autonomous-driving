@@ -1,0 +1,8 @@
+python3 '/home/af/jetson-inference/python/training/detection/ssd/train_ssd.py' --data=/home/af/ros2_ws/src/deep_learning_transfer_exercise/dataset --model-dir=/home/af/ros2_ws/src/deep_learning_transfer_exercise/models --batch-size=4 --epochs=100 --momentum=0.9 --freeze--base-net --weight-decay=0.0004 --lr=0.001 --dataset-type=voc --pretrained-ssd=/home/af/jetson-inference/python/training/detection/ssd/models/mobilenet-v1-ssd-mp-0_675.pth
+
+
+python3 eval_ssd.py --model /home/af/ros2_ws/src/deep_learning_transfer_exercise/models/mb1-ssd-Epoch-0-Loss-4.31261240111457.pth --dataset /home/af/ros2_ws/src/deep_learning_transfer_exercise/dataset --label_file /home/af/ros2_ws/src/deep_learning_transfer_exercise/dataset/labels.txt --eval_dir /home/af/ros2_ws/src/deep_learning_transfer_exercise/dataset/eval_results --net mb1-ssd
+
+
+python3 eval_ssd.py --model /home/af/ros2_ws/src/deep_learning_transfer_exercise/models/mb1-ssd-Epoch-99-Loss-1.746760536123205.pth --dataset /home/af/ros2_ws/src/deep_learning_transfer_exercise/dataset --label_file /home/af/ros2_ws/src/deep_learning_transfer_exercise/dataset/labels.txt --eval_dir /home/af/ros2_ws/src/deep_learning_transfer_exercise/dataset/eval_results --net mb1-ssd
+

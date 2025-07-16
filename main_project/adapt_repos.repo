@@ -1,0 +1,83 @@
+repositories:
+  adapt_vi:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_vi.git
+    version: main
+  adapt_mobint:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_mobint.git
+    version: main
+  adapt_obj:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_obj.git
+    version: main
+  adapt_trajp:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_trajp.git
+    version: main
+  adapt_loc:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_loc.git
+    version: main 
+  adapt_roucomp:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_roucomp.git
+    version: main
+  adapt_latlongcon:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_latlongcon.git
+    version: main
+  adapt_behplan:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_behplan.git
+    version: main
+  adapt_envmod:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_envmod.git
+    version: main
+  adapt_spotsl:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_spotsl.git
+    version: main
+  adapt_transceiver:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_transceiver.git
+    version: main
+  adapt_inf_spotupd:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_inf_spotupd.git
+    version: master
+  adapt_inf_trans:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_inf_trans.git
+    version: master  
+  v2x:
+    type: git
+    url: https://git.hs-coburg.de/Autonomous_Driving/v2x.git
+    version: students_msgs
+  adapt_msgs:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_msgs.git 
+    version: main   
+  adapt_inf_od:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_inf_od.git
+    version: main  
+  adapt_spot_filter:
+    type: git
+    url: https://git.hs-coburg.de/ADAPT/adapt_spot_filter.git 
+    version: master   
+  yasmin:
+    type: git
+    url: https://github.com/uleroboticsgroup/yasmin.git
+    version: main 
+  car_description:
+    type: git
+    url: https://git.hs-coburg.de/Autonomous_Driving/car_description.git
+    version: master 
+  ydlidar_ros2:
+    type: git
+    url: https://git.hs-coburg.de/Autonomous_Driving/ydlidar_ros2.git
+    version: master
+
+  

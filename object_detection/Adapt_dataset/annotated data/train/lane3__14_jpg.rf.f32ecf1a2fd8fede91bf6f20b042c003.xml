@@ -1,0 +1,40 @@
+<annotation>
+	<folder></folder>
+	<filename>lane3__14_jpg.rf.f32ecf1a2fd8fede91bf6f20b042c003.jpg</filename>
+	<path>lane3__14_jpg.rf.f32ecf1a2fd8fede91bf6f20b042c003.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>640</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>car</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>186</xmin>
+			<xmax>342</xmax>
+			<ymin>344</ymin>
+			<ymax>427</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>potted plant</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>473</xmin>
+			<xmax>584</xmax>
+			<ymin>256</ymin>
+			<ymax>416</ymax>
+		</bndbox>
+	</object>
+</annotation>

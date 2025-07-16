@@ -1,0 +1,24 @@
+================================================
+  NLOC    CCN   token  PARAM  length  location  
+------------------------------------------------
+       6      1     33      1       6 __init__@20-25@env.py
+       8      1     62      1       9 setup_subscriptions@27-35@env.py
+       4      1     41      1       5 setup_publishers@37-41@env.py
+       4      1     33      1       5 setup_transforms@43-47@env.py
+       3      1     25      2       4 pose_callback@49-52@env.py
+      12      3    166      5      27 quaternion_to_euler@54-80@env.py
+      35      8    283      2      48 scan_callback@82-129@env.py
+       7      1    106      4      18 transform_coordinates_to_base_link@131-148@env.py
+      11      3     54      0      11 main@150-160@env.py
+1 file analyzed.
+==============================================================
+NLOC    Avg.NLOC  AvgCCN  Avg.token  function_cnt    file
+--------------------------------------------------------------
+    109      10.0     2.2       89.2         9     env.py
+
+===============================================================================================================
+No thresholds exceeded (cyclomatic_complexity > 15 or length > 1000 or nloc > 1000000 or parameter_count > 100)
+==========================================================================================
+Total nloc   Avg.NLOC  AvgCCN  Avg.token   Fun Cnt  Warning cnt   Fun Rt   nloc Rt
+------------------------------------------------------------------------------------------
+       109      10.0     2.2       89.2        9            0      0.00    0.00

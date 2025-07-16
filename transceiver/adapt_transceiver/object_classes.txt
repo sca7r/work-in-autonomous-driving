@@ -1,0 +1,9 @@
+###object classes with there index###
+
+
+ 0 Background
+ 1 car
+ 2 traffic light
+ 3 potted plant
+ 4 person
+

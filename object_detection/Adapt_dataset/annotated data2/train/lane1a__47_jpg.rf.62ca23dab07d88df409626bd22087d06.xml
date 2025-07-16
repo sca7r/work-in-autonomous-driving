@@ -1,0 +1,40 @@
+<annotation>
+	<folder></folder>
+	<filename>lane1a__47_jpg.rf.62ca23dab07d88df409626bd22087d06.jpg</filename>
+	<path>lane1a__47_jpg.rf.62ca23dab07d88df409626bd22087d06.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>480</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>traffic light</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>487</xmin>
+			<xmax>579</xmax>
+			<ymin>59</ymin>
+			<ymax>186</ymax>
+		</bndbox>
+	</object>
+	<object>
+		<name>car</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>604</xmin>
+			<xmax>641</xmax>
+			<ymin>266</ymin>
+			<ymax>316</ymax>
+		</bndbox>
+	</object>
+</annotation>

@@ -1,0 +1,206 @@
+Integration Test Report: Environment Class in ADAPT Project
+Overview
+This report details the integration tests conducted for the EnvModel node in the ADAPT project. The tests validate the functionality of ROS 2 node initialization, pose and scan callbacks, TF transformations, and obstacle detection.
+
+Tested Component
+Component: EnvModel node
+Module: adapt_envmod.visualization
+Test Framework: unittest
+ROS Client Library: rclpy
+Test Results
+Test Case 1: Initialization of Node
+Precondition:
+
+The ROS 2 environment is properly set up.
+Test Steps:
+
+Initialize the rclpy library.
+Create an instance of the EnvModel node.
+Observe the logger output.
+Expected Result:
+
+Logger outputs "Lidar Transformer Node initialized".
+Node subscribes to /scan and /loc_pose topics.
+Publishers for /scans and /stop are initialized.
+Actual Result:
+
+Passed
+Logger output: "Lidar Transformer Node initialized".
+Subscriptions to /scan and /loc_pose confirmed.
+Publishers for /scans and /stop initialized.
+Comment: Node initialization confirmed to be correct.
+
+Test Case 2: Pose Callback with Valid Pose
+Precondition:
+
+The EnvModel node is running.
+A valid PoseStamped message is available on the /loc_pose topic.
+Test Steps:
+
+Publish a PoseStamped message to the /loc_pose topic.
+Expected Result:
+
+pose_callback updates self.base_link_pose with the pose from the message.
+Logger outputs "Updated base link pose".
+Actual Result:
+
+Passed
+self.base_link_pose updated correctly.
+Logger output: "Updated base link pose".
+Comment: Pose callback handling and logger output are as expected.
+
+Test Case 3: Scan Callback with No Pose
+Precondition:
+
+The EnvModel node is running.
+No PoseStamped message has been received.
+Test Steps:
+
+Publish a LaserScan message to the /scan topic.
+Expected Result:
+
+scan_callback logs a warning "No pose information available yet".
+Actual Result:
+
+Passed
+Logger output: "No pose information available yet".
+Comment: Proper handling of the missing pose information in the scan callback.
+
+Test Case 4: Scan Callback with Pose and Valid Transform
+Precondition:
+
+The EnvModel node is running.
+A valid PoseStamped message has been received.
+A valid transform from 9/laser_frame to 9/base_link is available.
+Test Steps:
+
+Publish a PoseStamped message to the /loc_pose topic.
+Publish a LaserScan message to the /scan topic.
+Expected Result:
+
+scan_callback processes the scan data.
+Detected objects are transformed to the base link frame and published to the /scans topic.
+Actual Result:
+
+Passed
+Scan data processed and transformed correctly.
+Objects published to /scans.
+Comment: Correct processing and transformation of scan data.
+
+Test Case 5: Scan Callback with Pose and No Valid Transform
+Precondition:
+
+The EnvModel node is running.
+A valid PoseStamped message has been received.
+No valid transform from 9/laser_frame to 9/base_link is available.
+Test Steps:
+
+Publish a PoseStamped message to the /loc_pose topic.
+Publish a LaserScan message to the /scan topic.
+Expected Result:
+
+scan_callback logs a warning "Transform lookup failed: {exception message}".
+Actual Result:
+
+Passed
+Logger output: "Transform lookup failed: {exception message}".
+Comment: Appropriate handling and logging of transform lookup failure.
+
+Test Case 6: Stop Condition Triggered
+Precondition:
+
+The EnvModel node is running.
+A valid PoseStamped message has been received.
+A valid transform from 9/laser_frame to 9/base_link is available.
+An obstacle is within the stop range (0.80 meters).
+Test Steps:
+
+Publish a PoseStamped message to the /loc_pose topic.
+Publish a LaserScan message with an obstacle within 0.80 meters to the /scan topic.
+Expected Result:
+
+scan_callback detects the obstacle.
+A Bool message with data=True is published to the /stop topic.
+Logger outputs "Obstacle detected, STOP!!!!".
+Actual Result:
+
+Passed
+Obstacle detected and Bool message published to /stop.
+Logger output: "Obstacle detected, STOP!!!!".
+Comment: Successful detection of obstacles and appropriate stop message publication.
+
+Test Case 7: No Stop Condition
+Precondition:
+
+The EnvModel node is running.
+A valid PoseStamped message has been received.
+A valid transform from 9/laser_frame to 9/base_link is available.
+No obstacles are within the stop range (0.80 meters).
+Test Steps:
+
+Publish a PoseStamped message to the /loc_pose topic.
+Publish a LaserScan message with no obstacles within 0.80 meters to the /scan topic.
+Expected Result:
+
+scan_callback processes the scan data.
+No Bool message is published to the /stop topic.
+Logger does not output "Obstacle detected, STOP!!!!".
+Actual Result:
+
+Passed
+Scan data processed correctly.
+No Bool message published to /stop.
+No logger output for obstacle detection.
+Comment: Proper processing of scan data with no false obstacle detection.
+
+Test Case 8: Euler to Quaternion Conversion
+Precondition:
+
+The EnvModel node is instantiated.
+Test Steps:
+
+Call the euler_to_quaternion method with specific roll, pitch, and yaw values (e.g., roll=0, pitch=0, yaw=1.57).
+Expected Result:
+
+Method returns the correct quaternion corresponding to the given Euler angles.
+Actual Result:
+
+Passed
+Correct quaternion returned.
+Comment: Accurate conversion of Euler angles to quaternion.
+
+Test Case 9: Quaternion to Euler Conversion
+Precondition:
+
+The EnvModel node is instantiated.
+Test Steps:
+
+Call the quaternion_to_euler method with specific quaternion values (e.g., x=0, y=0, z=0.707, w=0.707).
+Expected Result:
+
+Method returns the correct Euler angles corresponding to the given quaternion.
+Actual Result:
+
+Passed
+Correct Euler angles returned.
+Comment: Accurate conversion of quaternion to Euler angles.
+
+Test Case 10: Transform Coordinates to Base Link
+Precondition:
+
+The EnvModel node is instantiated.
+A valid transform message is available.
+Test Steps:
+
+Call the transform_coordinates_to_base_link method with specific x, y, and transform values.
+Expected Result:
+
+Method correctly transforms the coordinates from the laser frame to the base link frame and returns the transformed coordinates.
+Actual Result:
+
+Passed
+Coordinates correctly transformed and returned.
+Comment: Proper transformation of coordinates from laser frame to base link frame.
+
+Conclusion
+All integration tests for the EnvModel node in the ADAPT project have passed successfully. The tests confirm the reliable functionality of node initialization, pose and scan callbacks, TF transformations, and obstacle detection. The results ensure that the node performs as expected within the ROS 2 environment, providing accurate and consistent data handling for the ADAPT project's visualization needs.

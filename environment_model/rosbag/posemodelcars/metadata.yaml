@@ -1,0 +1,19 @@
+rosbag2_bagfile_information:
+  version: 4
+  storage_identifier: sqlite3
+  relative_file_paths:
+    - rosbag2_2024_06_17-20_28_23_0.db3
+  duration:
+    nanoseconds: 0
+  starting_time:
+    nanoseconds_since_epoch: 9223372036854775807
+  message_count: 0
+  topics_with_message_count:
+    - topic_metadata:
+        name: /pose_modelcars
+        type: mocap_msgs/msg/RigidBodies
+        serialization_format: cdr
+        offered_qos_profiles: ""
+      message_count: 0
+  compression_format: ""
+  compression_mode: ""
