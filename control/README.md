@@ -1,74 +1,62 @@
+#  Control
 
+## Overview
 
-## Component Description
-In our system architecture, the vehicle's movement is controlled by the lateral and longitudinal component. It subcribes to the trajectory planner which gives an interpolated trajectory along with velocity information for each waypoint and the parking path. The component use a pure pursuit controller to track the route and effectively follow it with simultaneous calculations of the angular velocity. 
+The **Control** module is responsible for the physical actuation of the Ego Vehicle. It translates high-level driving commands from the **Behaviour Planning** component into low-level motor signals sent over the **CAN BUS**, governing both how the vehicle steers and how fast it moves.
 
+This is the final step in the autonomous driving pipeline before commands reach the hardware.
 
-| In/Out | Topic Name| Message Type | Description | 
-| --------- | ---------- | ---------- | ----------- |
-| Input | /trajd |JointTrajectory | trajectory with positions and associated velocities for drive state |
-| Input | /trajpf |JointTrajectory | trajectory with positions and associated velocities for forward parking state |
-| Input| /trajpr |JointTrajectory | trajectory with positions and associated velocities for reverse parking state|
-| Input| /trajps |JointTrajectory | trajectory with positions and associated velocities set to zero |
-| Input| /stop | Bool | emergency stop |
-| Output | /cmd_vel | Twist | speed and steering angle commands to the actuators |
-| Output | /reach_goal | Bool | sent true to the behaviour planning to change the state further |
-| Output | /park_reverse | Bool | send true to the trajectory planner to trigger the reverse state |
+---
 
-## Lateral and Longitudinal Control Block Diagram
+## Responsibilities
 
- <img src="images/latlongcon.png" alt="Lateral and Longitudinal Control Block Diagram" title="Lateral and Longitudinal Control" width="1071" height="349">
+- Receive speed and steering manoeuvres from the Behaviour Planning FSM
+- Execute **lateral control** (steering direction)
+- Execute **longitudinal control** (acceleration/braking/speed)
+- Send actuation commands to the drive motor via **CAN BUS**
 
-## Functionality
-The adapt_latlongcon components takes three inputs from trajectory planner namely for drive, parking forward, parking reverse.
+---
 
-The functions are as follows:
-1. The functions path_for_drive(), path_for_park_for(), path_for_park_rev(), stores the trajectorys of the respective topics and set the appropriate flags to true or false
-2. The functions vehicle_pose() stores the ego vehicle's current position and orientation
-3. The pure_pursuit() function implements the logic for the path tracking algorithm to calculate the angular velocity.
-4. The stop() functions set the Twist message to 0.0 for effectively braking the ego vehicle.
-5. The twist_publisher() function use the set flags to determine the current condition, fill the messsage and execute the publisher.
+## How It Works
 
+```
+Behaviour Planning
+       │
+       │  speed manoeuvre commands
+       ▼
+  Control Node
+  ┌─────────────────────────┐
+  │  Lateral Controller     │  →  Steering angle
+  │  Longitudinal Controller│  →  Throttle / Brake
+  └─────────────────────────┘
+       │
+       │  CAN BUS
+       ▼
+   Drive Motor / Vehicle Hardware
+```
+
+The control module decouples lateral and longitudinal axes, processing each independently before issuing a unified CAN BUS output to the vehicle's drive system.
+
+---
+
+## ROS 2 Interface
+
+| Direction | Topic | Type | Description |
+|---|---|---|---|
+| Subscribed | `/speed_manoeuvre` | custom | Speed & steering commands from Behaviour Planning |
+| Published | — | CAN BUS | Direct hardware commands to the drive motor |
+
+---
 
 ## Dependencies
-1. adapt_trajp
-2. adapt_loc
 
-## Setup
+- ROS 2 Foxy
+- `ros2_pcan` — CAN BUS interface for ROS 2
+- ADAPT Behaviour Planning (`adapt_behplan`)
 
-## Installation Instructions
+---
 
-To install the Lateral and Longitudinal Control package, do follow the steps below:
+## Related Components
 
-### Step 1: Create a worksapce
-
-Open the terminal, navigate to the worksapce and create a 'src' directory where you want to clone the repository. 
-
-```shell
-mkdir src
-```
-### Step 2: Clone the Repository
-Navigate to 'src' and follow the given command to clone the repository.
-```shell
-git clone https://git.hs-coburg.de/ADAPT/adapt_latlongcon.git
-```
-### Step 3: Build the Package
-After cloning the repository, navigate back to the workspace
-```shell
-cd ..
-```
-Now, build the package using **`colcon`**:
-```shell
-colcon build --symlink-install
-```
-### Step 4: Source the setup file
-Once the build is complete, you'll need to source the workspace to make it available to ROS2:
-```shell
-source install/setup.bash
-```
-### Step 5: Now Run the Node
-You can now launch the Lateral and Longitudinal Control node:
-The entry point for Lateral and Longitudinal Control is **`pp`**.
-```shell
-ros2 run adapt_latlongcon pp
-```
+- **Behaviour Planning** — upstream source of manoeuvre commands
+- **Trajectory Planner** — provides the path that behaviour planning interprets
