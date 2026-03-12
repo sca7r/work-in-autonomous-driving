@@ -1,65 +1,71 @@
-## Component Description
+#  Transceiver
 
+## Overview
 
-`Maintainer - Harshawardhan & Anish`
+The **Transceiver** module is the communication hub of the Ego Vehicle. It handles all **Vehicle-to-Everything (V2X)** messaging, transmitting and receiving standardized messages between the Ego Vehicle, the smart infrastructure, and other traffic participants.
 
-This component is responsible for transmiting and receiving data between Ego-vehicle, Infrastructure and other traffic participants.
+Without this module, the vehicle has no awareness of available parking spots and cannot coordinate with the infrastructure.
 
-It is also responsible for converting and  publishing CAM and CPM messages  
+---
 
+## Responsibilities
 
-| In/Out | Topic Name| Message Type | Description | 
-| --------- | ---------- | ---------- | ----------- |
-| Input | `/loc_pose`| `PoseStamped` | The location of the EV.|
-| Input | `/detectnet/detctions`| `Detection2DArray` | The objection detection list to Infrastructure |
-| Input | `/euler_angles`| `RPY` | The Euler angles of the EV |
-| Input | `/selected_spot_location`| `PoseStamped` | The objection detection list to Infrastructure |
-| Output | `/ev_location`| `VehData` | locations of all vehicles |
-| Output | `/cam_msgs` | `CAM` |It is responsible for publishing the CAM messages of ego vehicle for V2X application|
-| Output | `/detected_objects` | `CPM` |It is responsible for publishing the CPM messages for V2X application|
+- Transmit **CAM** (Cooperative Awareness Messages) to announce the vehicle's presence
+- Transmit **CPM** (Collective Perception Messages) to share perceived objects with others
+- Receive **EVCSN** (Electric Vehicle Charging Spot Notification) messages from infrastructure containing available parking spot data
+- Bridge V2X communication into ROS 2 topics for internal system use
 
-## transceiver Block Diagram
- <img src="https://git.hs-coburg.de/ADAPT/adapt_transceiver/raw/branch/main/images/tr.png" alt="Transceiver Block Diagram" title="Transceiver" width="800" height="400">
+---
 
- ## Installation Instructions
+## Message Types
 
-To install the Transceiver package, do follow the steps below:
+| Message | Direction | Description |
+|---|---|---|
+| **CAM** | Outbound | Broadcasts ego vehicle position, speed, and heading to infrastructure and other participants |
+| **CPM** | Outbound | Shares locally detected objects with surrounding infrastructure/vehicles |
+| **EVCSN** | Inbound | Receives available parking spot list from infrastructure |
 
-### Step 1: Create a worksapce
+These message formats follow **ETSI ITS** (Intelligent Transport Systems) standards for V2X communication.
 
-Open the terminal, navigate to the worksapce and create a 'src' directory where you want to clone the repository. 
+---
 
-```shell
-mkdir src
+## How It Works
+
 ```
-### Step 2: Clone the Repository
-Navigate to 'src' and follow the given command to clone the repository.
-```shell
-git clone https://git.hs-coburg.de/ADAPT/adapt_transceiver.git
+                    ┌─────────────────────────────┐
+ROS 2 Topics ──────▶│                             │──▶  V2X Network (CAM, CPM)
+                    │       Transceiver Node      │
+V2X Network ───────▶│                             │──▶  ROS 2 Topics (EVCSN data)
+                    └─────────────────────────────┘
 ```
-### Step 3: Build the Package
-After cloning the repository, navigate back to the workspace
-```shell
-cd ..
-```
-Now, build the package using **`colcon`**:
-```shell
-colcon build --symlink-install
-```
-### Step 4: Source the setup file
-Once the build is complete, you'll need to source the workspace to make it available to ROS2:
-```shell
-source install/setup.bash
-```
-### To publish the CAM message
-You can now launch the Transceiver node:
-The entry point is **`transceiver_node`**.
-```shell
-ros2 run adapt_transceiver transceiver_node
-```
-### To publish CPM message
-you can now launch the cpm node
-the entry point is **`cpm`**
-```shell
-ros2 run adapt_transceiver cpm
-```
+
+The transceiver acts as a protocol translator, converting internal ROS 2 messages into V2X-compliant packets for transmission, and decoding incoming V2X packets back into ROS 2 messages for the rest of the system.
+
+---
+
+## ROS 2 Interface
+
+| Direction | Topic | Type | Description |
+|---|---|---|---|
+| Subscribed | `/vehicle_position` | custom | Ego vehicle pose for CAM generation |
+| Subscribed | `/detected_objects` | custom | Object detections for CPM generation |
+| Published | `/parking_spots` | custom | Decoded EVCSN parking spot list |
+
+> Topic names may vary — refer to source code for exact topic strings.
+
+---
+
+## Dependencies
+
+- ROS 2 Foxy
+- `v2x_msgs` — V2X message definitions ([V2X msg repo](https://git.hs-coburg.de/Autonomous_Driving/v2x.git))
+- V2X-capable communication hardware/network interface
+
+---
+
+## Related Components
+
+- **Spot Selector** — consumes the decoded parking spot list from EVCSN messages
+- **Localisation** — provides vehicle position for outbound CAM messages
+- **Object Detection** — provides detected objects for outbound CPM messages
+- **Infrastructure Transceiver** — the counterpart on the infrastructure side that encodes/sends EVCSN
