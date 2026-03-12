@@ -1,31 +1,84 @@
-# Object Detection Component
-
-This repository hosts the trained DetectNet model and ROS2 components for object detection in a model city environment. The model has been fine-tuned on a dataset representative of a controlled urban landscape, with the goal of accurately identifying key elements that are crucial for autonomous navigation.
+#  Object Detection
 
 ## Overview
 
-Our DetectNet model has been trained to recognize several classes of objects which are integral to the autonomous driving context. These classes, annotated in the dataset, include:
+The **Object Detection** module is responsible for identifying and localizing obstacles in the Ego Vehicle's surroundings. It combines two complementary sensing modalities — **LiDAR** point cloud data and **camera-based deep learning inference** via NVIDIA's DetectNet — to provide robust, real-time detection of static and dynamic objects.
 
-- **Person**: Individuals dummies in the model city.
-- **traffic_light**: Signalling devices positioned at road intersections, pedestrian crossings, and other locations to control flows of traffic.
-- **potted plant**: Trees, shrubs, and other plant within the model city.
-- **car**: Cars, trucks, and other modes of transportation moving or stationary within the model city.
+The detected objects are forwarded to the **Environment Model**, which integrates them into the vehicle's occupancy grid.
 
-Each class has been annotated with a unique color code for visual differentiation in the detection process.
+---
 
-## Process
+## Responsibilities
 
-The development of our object detection model involved several steps:
+- Process raw **LiDAR** point cloud data to detect nearby objects
+- Run **DetectNet** inference on **Intel RealSense** camera frames
+- Publish detected object positions and classes for the Environment Model
 
-1. **Data Capture**: We collected images from our model city using the Intel Realsense Camera.
-2. **Annotation**: Utilizing the Roboflow tool, we annotated the dataset with bounding boxes around objects of interest across the aforementioned classes.
-3. **Model Training**: We trained our model using NVIDIA Jetson and DetecNet architectures to optimize for prediction precision based on the pre-trained model.
-4. **ROS2 Integration**: The trained model was then implemented within a ROS2 environment to serve as a real-time object detection component.
+---
 
-## Classes and Color Codes
+## How It Works
+
+```
+Intel RealSense Camera
+        │  RGB frames
+        ▼
+   DetectNet (ros_deep_learning)
+        │  detected objects + bounding boxes
+        ▼
+  Object Detection Node  ──────────────────▶  /detected_objects
+        ▲
+        │  point cloud
+LiDAR ──┘
+```
+
+LiDAR provides precise 3D distance measurements for nearby obstacles, while DetectNet adds semantic classification (e.g. pedestrian, vehicle, cone) from camera data. Together they produce richer detections than either sensor alone.
+
+---
+
+## ROS 2 Interface
+
+| Direction | Topic | Type | Description |
+|---|---|---|---|
+| Subscribed | `/camera/color/image_raw` | `sensor_msgs/Image` | RGB frames from RealSense |
+| Subscribed | `/lidar/points` | `sensor_msgs/PointCloud2` | LiDAR point cloud |
+| Published | `/detected_objects` | custom | Detected obstacle positions & classes |
+
+> Topic names may vary — refer to source code for exact topic strings.
+
+---
+
+## Running Object Detection
+
+**Start the Intel RealSense camera:**
+```bash
+ros2 launch realsense2_camera rs_launch.py
+```
+
+**Start DetectNet inference:**
+```bash
+ros2 launch ros_deep_learning detectnet.ros2.launch
+```
+
+---
+
+## Dependencies
+
+- ROS 2 Foxy
+- `ros_deep_learning` — NVIDIA DetectNet for ROS 2
+- `realsense2_camera` — Intel RealSense ROS 2 driver
+- LiDAR driver (hardware dependent)
+- Intel RealSense Camera (hardware)
+- LiDAR sensor (hardware)
+
+---
+
+## Related Components
+
+- **Environment Model** — consumes detection output to build the occupancy grid
+- **Behaviour Planning** — reacts to detected obstacles (e.g. stopping before parking)
 
 
-We have assigned the following color codes to each class for visual differentiation during the detection process:
+The following color codes are assigned to each class for visual differentiation during the detection process:
 
 | Color       | Class Name    | Hex Code |
 |-------------|---------------|----------|
@@ -34,31 +87,6 @@ We have assigned the following color codes to each class for visual differentiat
 | 🟪 | potted plant | `#800080` |
 | 🟨 | traffic_light    | `#FFFF00` |
 
-## ROS2 Topics for Object Detection
 
-| In/Out | Topic Name| Message Type | Description | 
-| --------- | ---------- | ---------- | ----------- |
-| Input | /raw_images|  image_in| Raw input image | |
-| Output | /detectnet/detections| vision_msgs/Detection2DArray  | Detection results (Bounding boxes, class IDs, confidences) |
-
-## object detection node
-Below are the mAP scores of our trained model.
-
-
-<img src="https://git.hs-coburg.de/ADAPT/adapt_obj/raw/branch/main/images/map.png" alt="mAP Score" title="mAP Score" width="600" height="400">
-
-
-
-In order to run the object detection the realsense camera needs to be initialized, to do so run the following command
-```shell
-ros2 launch realsense2_camera rs_launch.py
-``` 
-### Note -
-- To run the trained model we need to change the path of the model in `detctnet.ros2.launch` file to the the path of trained model.
- 
- Now start the detectnet to run the trained model by running the following command 
-```shell
-ros2 launch ros_deep_learning detectnet.ros2.launch
-``` 
 
 
