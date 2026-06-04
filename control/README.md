@@ -339,7 +339,7 @@ pytest src/adapt_latlongcon/test/
 
 ---
 
-## Known Limitations & Notes
+## Limitations & Notes
 
 - **Reverse parking uses a hardcoded angular velocity** (`-24.62 rad/s`) rather than Pure Pursuit. This is calibrated for a specific vehicle geometry and parking scenario and may require tuning for different environments.
 - **Wheel base is hardcoded** at `0.5 m` inside `__init__`. This should ideally be a ROS 2 parameter.
