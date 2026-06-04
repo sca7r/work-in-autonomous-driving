@@ -2,7 +2,7 @@
 
 ## Overview
 
-The **Localisation** module provides the Ego Vehicle with a precise, real-time understanding of its position and orientation in the world. Within the **ADAPT** (Autonomous Driving Platform and Test) system, localisation is achieved using an **OptiTrack Motion Capture (MoCap)** system deployed inside a Model City test environment.
+The **Localisation** module provides the Ego Vehicle with a precise, real-time understanding of its position and orientation in the world. Within the **ADAPT** (Autonomous Driving And Parking Technology) system, localisation is achieved using an **OptiTrack Motion Capture (MoCap)** system deployed inside a Model City test environment.
 
 The node subscribes to raw rigid body pose data from the OptiTrack system, identifies the ego vehicle by its assigned rigid body ID, converts the raw quaternion orientation into Euler angles (roll, pitch, yaw), and publishes both the full 6DOF pose and the Euler angles for downstream consumption by other ADAPT components.
 

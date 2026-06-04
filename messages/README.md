@@ -2,7 +2,7 @@
 
 ## Overview
 
-The **Messages** package (`adapt_msgs`) is the shared interface layer of the ADAPT (Autonomous Driving Platform and Test) system. It defines all custom **ROS 2 message types** used for inter-component communication across the entire pipeline — from LiDAR perception and localisation through to behaviour planning, V2X communication, and actuation.
+The **Messages** package (`adapt_msgs`) is the shared interface layer of the ADAPT (Autonomous Driving And Parking Technology) system. It defines all custom **ROS 2 message types** used for inter-component communication across the entire pipeline, from LiDAR perception and localisation through to behaviour planning, V2X communication, and actuation.
 
 In ROS 2, custom message types must be compiled into their own dedicated package before any other package can import them. Centralising all ADAPT-specific `.msg` definitions here avoids circular dependencies, enforces consistent field naming and types system-wide, and provides a single place to evolve the data contracts between components.
 
@@ -26,7 +26,7 @@ This package uses `ament_cmake` and `rosidl` to generate the C++ and Python bind
 - [Installation & Building](#installation--building)
 - [Using Messages in Other Packages](#using-messages-in-other-packages)
 - [Who Uses Each Message](#who-uses-each-message)
-- [Known Issues](#known-issues)
+
 
 ---
 

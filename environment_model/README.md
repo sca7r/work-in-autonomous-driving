@@ -2,7 +2,7 @@
 
 ## Overview
 
-The **Environment Model** module is the perception backbone of the ADAPT (Autonomous Driving Platform and Test) system. It is responsible for processing raw sensor data from a **2D LiDAR scanner**, anchoring it to the ego vehicle's pose received from the **Localisation** component, and producing two key outputs:
+The **Environment Model** module is the perception backbone of the ADAPT (Autonomous Driving And Parking Technology) system. It is responsible for processing raw sensor data from a **2D LiDAR scanner**, anchoring it to the ego vehicle's pose received from the **Localisation** component, and producing two key outputs:
 
 1. **`/scans`** — a stream of transformed, filtered `DetectedObjects` (obstacle positions in the vehicle frame) consumed by Behaviour Planning and Route Computer.
 2. **`/stop`** — a binary stop signal that triggers an immediate halt when any obstacle falls within a configurable safety range.
@@ -34,7 +34,6 @@ A second node — the **Visualization** node — runs alongside the environment 
 - [Parameters](#parameters)
 - [Testing](#testing)
 - [Rosbag Data](#rosbag-data)
-- [Known Issues & Linting Notes](#known-issues--linting-notes)
 - [Integration with ADAPT](#integration-with-adapt)
 
 ---
